@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Contoh Load Data JSON</title>
+    <link rel="stylesheet" href="bootstrap.min.css"/>
+    <style>
+        .tbody-baru
+        {
+            color:blue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Data Table</h1>
+    <table class="table table-bordered" style="width:100%" cellpadding="10px" cellspacing="10px" border="1">
+        <thead>
+            <tr>
+                <th>NO</th>
+                <th>Nama</th>
+                <th>Email</th>
+                <th>Telp</th>
+                <th>Foto</th>
+            </tr>
+        </thead>
+        <tbody></tbody> <!--Placeholder-->
+    </table>
+</body>
+<script src="jquery-3.6.0.js"></script>
+<script>
+    //Fungsi untuk membaca file json
+    $.getJSON("data/data.json", function(res){
+        //nama variable
+        var items=[];
+
+        //untuk looping sebanyak data collection json
+        $.each(res, function(index, val){
+
+            //push => untuk menambahkan data pada variabel items
+            items.push("<tr>");
+                items.push("<td id='"+index+"'>"+ val.id +"</td>");
+                items.push("<td id='"+index+"'>"+ val.nama +"</td>");
+                items.push("<td id='"+index+"'>"+ val.email +"</td>");
+                items.push("<td id='"+index+"'>"+ val.telp +"</td>");
+                items.push("<td id='"+index+"'><img src='foto/"+ val.foto +"' height='100' widht='50'></td>");
+            items.push("</tr>");
+        })
+        $("<tbody/>", {
+            "class" : "tbody-baru",
+            html:items.join("")
+        }).appendTo("table")
+
+    });
+</script>
+</html>

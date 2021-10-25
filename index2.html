@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <script src="jquery-3.4.1.js"></script>
+  <script>
+    $(document).ready(function () {
+      $("button").click(function () {
+        $.getJSON("data.json", function (result) {
+          $.each(result, function (index, value) {
+            if (value instanceof Object) {
+              value = JSON.stringify(value);
+            }
+            console.log(index, value);
+            $("div").append(index + ": " + value + "<br/>");
+          });
+        });
+      });
+    });
+
+  </script>
+</head>
+
+<body>
+
+  <button>Klik Saya</button>
+
+  <div></div>
+
+</body>
+
+</html>
